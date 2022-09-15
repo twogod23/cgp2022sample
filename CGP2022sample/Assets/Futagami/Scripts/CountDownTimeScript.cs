@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class CountDownTimeScript : MonoBehaviour
 {
     //カウントダウンする時間の定義
-    public float countdown;
+    public float countdown = 10.0f;
 
     //時間を表示するテキストの定義
     public Text timetext;
@@ -15,8 +15,7 @@ public class CountDownTimeScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //初期値の設定
-        countdown = 30.0f;
+        
     }
 
     // Update is called once per frame

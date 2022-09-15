@@ -21,6 +21,6 @@ public class CameraWorkScript : MonoBehaviour
         Vector3 playerpos = player.transform.position;
 
         //カメラの座標指定
-        transform.position = new Vector3 (0, playerpos.y + 3, -10);
+        transform.position = new Vector3 (0, playerpos.y + 2, -10);
     }
 }
