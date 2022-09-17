@@ -41,17 +41,17 @@ public class PlayerScript : MonoBehaviour
         //横移動の設定
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Translate(-0.01f, 0, 0);
+            transform.Translate(-0.1f, 0, 0);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Translate(0.01f, 0, 0);
+            transform.Translate(0.1f, 0, 0);
         }
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("BlockSurface"))
         {
             jumpcount = 0;
         }
