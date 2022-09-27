@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     private Rigidbody2D rb2d;
-    public float jump = 600f;
+    private float jump = 600f;
+    private float walk = 200f;
     public float jumpcount;
 
     // Start is called before the first frame update
@@ -41,11 +42,18 @@ public class PlayerScript : MonoBehaviour
         //横移動の設定
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Translate(-0.1f, 0, 0);
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            rb2d.AddForce(Vector2.left * walk);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Translate(0.1f, 0, 0);
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            rb2d.AddForce(Vector2.right * walk);
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
         }
     }
 

@@ -8,6 +8,8 @@ TagManager:
   - BlockSurface
   - Block
   - GoalBlockSurface
+  - Wallleft
+  - Wallright
   layers:
   - Default
   - TransparentFX
