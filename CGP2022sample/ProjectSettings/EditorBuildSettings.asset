@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Futagami/Scenes/MenuScene.unity
+    guid: a36b4c7929520504ea346d1655281324
+  - enabled: 1
+    path: Assets/Futagami/Scenes/GameScene.unity
+    guid: 407aed86b9adeb24cb5d94869de497cd
+  - enabled: 1
+    path: Assets/Futagami/Scenes/GameoverScene.unity
+    guid: 08df9acf4f0b1234b8851629380325df
+  - enabled: 1
+    path: Assets/Futagami/Scenes/ClearScene.unity
+    guid: 91f2cda28f6c9e44fb4d26677ae68097
   m_configObjects: {}
