@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
 public class CountDownTimeScript : MonoBehaviour
 {
     //制限時間の定義
@@ -18,6 +17,9 @@ public class CountDownTimeScript : MonoBehaviour
     //結果に表示する時間の定義
     public static float cleartime;
 
+    //スタートを案内するテキストの定義
+    public GameObject startTxt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,7 @@ public class CountDownTimeScript : MonoBehaviour
         settime = 30.0f;
         countdown = settime;
         cleartime = 0.0f;
+        startTxt.SetActive(true);
     }
 
     // Update is called once per frame
@@ -44,6 +47,12 @@ public class CountDownTimeScript : MonoBehaviour
         
         //経過時間を計算
         cleartime = settime - countdown;
+
+        //スタートを案内するテキストの消去
+        if (cleartime > 2.0f)
+        {
+            Destroy(startTxt);
+        }
     }
 
     //呼び出される時間

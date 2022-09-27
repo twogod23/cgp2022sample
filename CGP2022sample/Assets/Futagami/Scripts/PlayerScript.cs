@@ -5,15 +5,19 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     private Rigidbody2D rb2d;
-    private float jump = 600f;
-    private float walk = 200f;
+    public float jump = 600f;
     public float jumpcount;
+
+    private float blockMoveBefore;
+    private bool move;
 
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         jumpcount = 0;
+        blockMoveBefore = 0;
+        move = true;
     }
 
     // Update is called once per frame
@@ -22,6 +26,8 @@ public class PlayerScript : MonoBehaviour
         //ジャンプの設定
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            move = true;
+            
             if(jumpcount == 0)
             {
                 rb2d.AddForce(Vector2.up * jump);
@@ -42,26 +48,42 @@ public class PlayerScript : MonoBehaviour
         //横移動の設定
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-            rb2d.AddForce(Vector2.left * walk);
+            transform.Translate(-0.1f, 0, 0);
+            move = true;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-            rb2d.AddForce(Vector2.right * walk);
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            transform.Translate(0.1f, 0, 0);
+            move = true;
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("BlockSurface"))
         {
             jumpcount = 0;
+        }
+
+        if (other.gameObject.CompareTag("BlockSurface"))
+        {
+            if (!Input.GetKeyDown(KeyCode.Space) || !Input.GetKey(KeyCode.LeftArrow) || !Input.GetKey(KeyCode.RightArrow))
+            {
+                if (move == true)
+                {
+                    blockMoveBefore = other.gameObject.transform.parent.position.x;
+                    move = false;
+                }
+                else
+                {
+                    float blockMove = other.gameObject.transform.parent.position.x - blockMoveBefore;
+                    blockMoveBefore = other.gameObject.transform.parent.position.x;
+                    transform.Translate(blockMove, 0, 0);
+                    Debug.Log(blockMove);
+                    Debug.Log(other.gameObject.name);
+                }
+                
+            }
         }
     }
 }

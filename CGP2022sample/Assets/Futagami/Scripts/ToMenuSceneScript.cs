@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ToGameSceneScript : MonoBehaviour
+public class ToMenuSceneScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -28,9 +28,9 @@ public class ToGameSceneScript : MonoBehaviour
     {
         //停止前の処理
         Debug.Log("check");
-        //停止する秒数を指定 1.0f
+        //停止する秒数を指定 0.8f
         yield return new WaitForSeconds(0.8f);
         //停止後の処理
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("MenuScene");
     }
 }

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GoalScrpt : MonoBehaviour
+public class GoalScript : MonoBehaviour
 {
     public static float goaltime;
     public GameObject goaltimeTxt;
+    public GameObject goalTxt;
+    public GameObject goalBlock;
     private bool goal;
     private float loadSceneTime;
 
@@ -15,6 +17,7 @@ public class GoalScrpt : MonoBehaviour
     {
         goaltime = 0.0f;
         loadSceneTime = 2.0f;
+        goalTxt.SetActive(false);
     }
 
     // Update is called once per frame
@@ -22,13 +25,15 @@ public class GoalScrpt : MonoBehaviour
     {
         if (goal == true)
         {
-            loadSceneTime -= Time.deltaTime;
+           goalBlock.GetComponent<Renderer>().material.color = Color.HSVToRGB(Time.time % 1, 1, 1);
+           
+           /* loadSceneTime -= Time.deltaTime;
 
             if (loadSceneTime <= 0)
             {
                 //SceneManager.LoadScene("GoalScene");
                 Debug.Log("goaltime");
-            }
+            }*/
         }
     }
 
@@ -41,6 +46,8 @@ public class GoalScrpt : MonoBehaviour
                 goaltime = CountDownTimeScript.GetTime();
                 Destroy(goaltimeTxt);
                 goal = true;
+                goalTxt.SetActive(true);
+                StartCoroutine("SceneChange");
             }
         }
     }
@@ -48,5 +55,13 @@ public class GoalScrpt : MonoBehaviour
     public static float GetGoaltime()
     {
         return goaltime;
+    }
+
+    IEnumerator SceneChange()
+    {
+        //停止する秒数を指定
+        yield return new WaitForSeconds(loadSceneTime);
+        //停止後の処理
+        SceneManager.LoadScene("ClearScene");
     }
 }

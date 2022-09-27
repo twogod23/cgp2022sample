@@ -6,6 +6,7 @@ public class BlockMoveScript : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float lr;
+    public float move;
     public GameObject block;
 
     // Start is called before the first frame update
@@ -17,7 +18,8 @@ public class BlockMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(speed * lr, 0, 0);
+        move = speed * lr; 
+        transform.Translate(move, 0, 0);
 
         if (block.transform.position.x < -8.0f)
         {
